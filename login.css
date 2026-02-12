@@ -1,0 +1,60 @@
+body
+{
+    font-family: Arial, Helvetica, sans-serif;
+    background: #5db4d4;
+    background: linear-gradient(90deg,rgba(93, 180, 212, 1) 0%, rgba(203, 231, 242, 1) 100%);
+    
+}
+.main
+{
+    background-color: rgba(240, 255, 255, 0.945);
+    border-radius: 6px;
+    width: 250px;
+    height: 250px;
+    padding: 10%;
+    padding-top:5%;
+    padding-bottom: 15%;
+    margin: auto;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    text-align: center;
+    
+}
+.login {
+    border-radius: 3px;
+    border-top: rgba(240, 248, 255, 0.021);
+    border-left:rgba(240, 248, 255, 0.021) ;
+    border-right: rgba(240, 248, 255, 0.021);
+    background-color: azure;
+    border-color: rgba(0, 0, 0, 0.589);
+    padding: 10px;
+    
+}
+:focus-visible
+{
+    outline: none; 
+    border-radius: 3px;
+    border-top: rgba(240, 248, 255, 0.021);
+    border-left:rgba(240, 248, 255, 0.021) ;
+    border-right: rgba(240, 248, 255, 0.021);
+    background-color: azure;
+    border-color: rgba(0, 0, 0, 0.589);
+  
+}
+.myButton input
+{
+  
+  background-color:#5db4d4;    /* dark red color on buttons */
+  color: white;
+  padding: 8px 18px 8px 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+
+::placeholder
+{
+    color: black;
+}
