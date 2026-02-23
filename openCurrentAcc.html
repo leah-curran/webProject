@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,13 +17,15 @@
         }
     </script>
     <div class="nav">
-    <div class="links">
-    <img src="logo.jpg" alt="logo" width="100" height="100">
-    <ul><li><A HREF="CurrentAccMenu.html">Back</A></li>
-<li><A HREF="openCurrentAcc.html">Open Current Account</A></li>
+     <img src="logo.jpg" width="100" height="100">
+     <div class="links">
+        <!-- the top bar menu to navigate between pages -->
+    <ul><li><A HREF="AccMaint.html">Home</A></li>
+    <li><A HREF="openCurrentAcc.html">Open Current Account</A></li>
 
-</ul></div>
+    </ul></div>
     </div>
+    <!-- this will move to the open current acc php file but will also run the confirm check function on submit -->
     <form method="post" action="openCurrentAcc.php" onsubmit="return confirmCheck()">
         <p>
             <label for="CurrentAccID">Current Account ID</label>
@@ -34,6 +37,7 @@
             pattern="[0-9]+(\.[0-9]{1,2})?"autocomplete=off required/>
         </p>
         <input type="submit" value="submit"/>
+        <br>
         <input type="reset" value="Clear"/>
     </form>
 </body>
