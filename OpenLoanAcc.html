@@ -24,12 +24,22 @@
 <li><A HREF="ChangePassword.html">Change Password</A></li>
 </ul></div>
     </div>
-    <div class="submenu">
-       <ul>
-<P><a href=DepositAccMenu.html>Deposit Account Menu</a></P>
-        <P><a href=LoanAccMenu.html>Loan Account Menu</a></P>
-        <P><a href=CurrentAccMenu.html>Current Account Menu</a></P>
-       </ul> 
+    <div class="loanbody">
+      <form action="OpenLoan.php" method="post">
+          <p><label for = "name"> Customer Name</label>
+            <input type ="text" name = "name" id = "name" placeholder="name" autocomplete= off required></p>
+        <p><label for = "address"> Address</label>
+            <input type ="text" name = "address" id = "address" placeholder="address" autocomplete= off required></p>
+             <p><label for = "eircode"> Eircode</label>
+            <input type ="text" name = "eircode" id = "eircode" placeholder="eircode" autocomplete= off required></p>
+        <p><label for = "dob"> Date Of Birth</label>
+            <input type ="date" name = "dob" id = "dob" placeholder="date of birth" required></p>
+        <br>
+
+        <input type="submit" value = "Submit"/>
+        <input type="reset" value = "Clear"/>
+
+    </form>
     </div>
 </body>
 </html>

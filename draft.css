@@ -101,3 +101,51 @@ a:hover {
   left: 30px;
  z-index: 2;
 }
+
+.addbody
+{
+  display: flex;
+  background: #bbedff;
+  background-repeat: round;
+  color: rgb(0, 0, 0);
+  text-align: center;
+   font-family: "Comfortaa", sans-serif !important;
+  font-optical-sizing: auto;
+  font-size:100%;
+  font-weight: bolder;
+  padding: 5%;
+  width: 450px;
+  border-radius: 3%;
+  margin: 15% auto; 
+  position: relative;
+  
+  
+}
+input{
+   border-radius: 3px;
+    border-top: rgba(240, 248, 255, 0.021);
+    border-left:rgba(240, 248, 255, 0.021) ;
+    border-right: rgba(240, 248, 255, 0.021);
+    background-color: azure;
+    border-color: rgba(0, 0, 0, 0.589);
+    padding: 5px;
+    
+}
+.loanbody
+{
+  display: flex;
+
+  background-repeat: round;
+  color: rgb(0, 0, 0);
+  text-align: center;
+   font-family: "Comfortaa", sans-serif !important;
+  font-optical-sizing: auto;
+  font-size:100%;
+  font-weight: bolder;
+  padding: 5%;
+  width:fit-content;
+  border-radius: 3%;
+  margin: 15% auto; 
+  
+  
+}
