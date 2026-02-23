@@ -1,0 +1,174 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+img{
+    border-radius:5%;
+    display: flex;
+    justify-content: flex-start;
+    margin-right: 80px;
+}
+h2{
+    text-align: center;
+}
+.links
+{
+  display: flex;
+  text-decoration: none;
+  color: rgb(105, 220, 255);
+}
+ul {
+  list-style-type: disc; /* makes a bullet list */
+  margin: 0;
+  padding: 0%;
+  display: inline-block; /* stops text from overlapping on one line */
+  justify-content: center; /* centers the text */
+}
+.nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 10px;
+ 
+  display: flex; /* keeps it all on one line */
+  justify-content: center;
+  
+}
+
+.nav ul li {
+  float: left;
+  
+}
+
+.nav ul li {
+  display: block;
+  color: white;
+  
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+  .nav
+{
+  background-color: #76c8e6 ;   
+  width: 100%; /* allows the backgound to show */
+  border-radius: 10px;  /* gives the div rounded corners */
+  display:flex;
+  align-items: center;
+  padding: 20px;
+  margin: auto;
+  position: fixed;
+  top:0;/*makes element stay in place even when scrolling*/
+  left:0;
+ z-index: 2;
+}
+body
+{
+  background: #83cde7;
+  background-repeat: round;
+  color: white;
+  text-align: center;
+   font-family: "Comfortaa", sans-serif !important;
+  font-optical-sizing: auto;
+  font-size:96%;
+  font-weight: bolder;
+}
+form{
+    border-radius: 5px;
+    background-color: #89ceeb;
+    padding: 20px;
+}
+
+label{
+    display: block;
+}
+
+/* Styling of input element */
+input[type=text], select {
+  width: 50%;
+  padding: 12px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=email]{
+    width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=date]{
+    width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=url]{
+     width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 50%;
+  background-color: #3939399c;
+  color: white;
+  padding: 14px;
+  margin-top: 100px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+input[type=reset]{
+    width: 50%;
+  background-color: #3939399c;
+     color: white;
+  padding: 14px;
+  margin: 20px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=reset]:hover{
+    background-color: #ff3333;
+}
+
+.error {
+            color: red;
+            font-size: 14px;
+            display: none;
+    }
+.match {
+            color: green;
+            font-size: 14px;
+            display: none;
+    }
+input.invalid {
+            border: 2px solid red;
+    }
+input.valid {
+            border: 2px solid green;
+     }
