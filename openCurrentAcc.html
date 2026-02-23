@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="CurrentAcc.css">
+</head>
+<body>
+    <script>
+        function confirmCheck()
+        {
+            return confirm("Is the information correct?");
+
+        }
+    </script>
+    <div class="nav">
+    <div class="links">
+    <img src="logo.jpg" alt="logo" width="100" height="100">
+    <ul><li><A HREF="CurrentAccMenu.html">Back</A></li>
+<li><A HREF="openCurrentAcc.html">Open Current Account</A></li>
+
+</ul></div>
+    </div>
+    <form method="post" action="openCurrentAcc.php" onsubmit="return confirmCheck()">
+        <p>
+            <label for="CurrentAccID">Current Account ID</label>
+            <input type="text" name="CurrentAccID" id="CurrentAccID" placeholder="CurrentAccID" autocomplete=off required/>
+        </p>
+		<p>
+            <label for="Balance">Balance</label>
+            <input type="text" name="Balance" id="Balance" placeholder="Balance" 
+            pattern="[0-9]+(\.[0-9]{1,2})?"autocomplete=off required/>
+        </p>
+        <input type="submit" value="submit"/>
+        <input type="reset" value="Clear"/>
+    </form>
+</body>
+</html>
