@@ -1,0 +1,44 @@
+<!doctype html>
+<head>
+<title>Open a Deposit Account</title>
+<link rel="stylesheet" href="draft.css" />
+</head>
+
+<body>
+<main>
+
+<!-- navigation within the deposit account menu -->
+<nav class="subnav">
+<a href="MainMenu.html">Home</a> |
+<a href="OpenDepositAccount.html">Open</a> |
+<a href="CloseDepositAccount.html">Close</a> |
+<a href="AmendViewDeposit.html">Amend/View</a> |
+<a href="DepositAccountHistory.html">History</a>
+</nav>
+
+<h1>Open a Deposit Account</h1>
+
+<form action="open_deposit.php" method="post">
+<label>Customer ID
+<input type="number" name="cust_id" required />
+</label>
+<br><br>
+
+<label>Initial Deposit (€)
+<input type="number" name="initial_deposit" step="0.01" min="0" required />
+</label>
+<br><br>
+
+<label>Date Opened
+<input type="date" name="opened_date" />
+</label>
+<br><br>
+
+<button type="submit">Open Account</button>
+</form>
+<br><br>
+
+<p><a href="MainMenu.html">Return to Main Menu</a></p>
+</main>
+</body>
+</html>

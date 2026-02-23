@@ -1,0 +1,33 @@
+<!doctype html>
+<head>
+<title>Amend / View a Deposit Account</title>
+<link rel="stylesheet" href="draft.css" />
+</head>
+
+<body>
+<main>
+
+<!-- navigation within the deposit account menu -->
+<nav class="subnav">
+<a href="MainMenu.html">Home</a> |
+<a href="OpenDepositAccount.html">Open</a> |
+<a href="CloseDepositAccount.html">Close</a> |
+<a href="AmendViewDeposit.html">Amend/View</a> |
+<a href="DepositAccountHistory.html">History</a>
+</nav>
+
+<h1>Amend / View a Deposit Account</h1>
+
+<form action="amend_view_deposit.php" method="post">
+<label>Deposit Account ID
+<input type="number" name="deposit_id" required />
+</label>
+<button type="submit" name="action" value="view">View</button>
+<button type="submit" name="action" value="amend">Amend</button>
+</form>
+
+<p><a href="MainMenu.html">Return to Main Menu</a></p>
+
+</main>
+</body>
+</html>
