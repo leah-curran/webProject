@@ -4,23 +4,23 @@
     echo " New Customer Added: <br>";
     echo " First Name is : " . $_POST['firstname'] . "<br>";
     echo " Surname is : " . $_POST['surname'] . "<br>";
-    echo " Surname is : " . $_POST['address'] . "<br>";
-    echo " Surname is : " . $_POST['eircode'] . "<br>";
+    echo " Address is : " . $_POST['address'] . "<br>";
+    echo " Eircode is : " . $_POST['eircode'] . "<br>";
     
 
     $date=date_create($_POST['dob']);
 
     echo " Date of Birth is : " . date_format($date, "d/m/Y") . "<br>";
 
-    echo " Surname is : " . $_POST['telephone'] . "<br>";
-    echo " Surname is : " . $_POST['occupation'] . "<br>";
-    echo " Surname is : " . $_POST['salary'] . "<br>";
-    echo " Surname is : " . $_POST['email'] . "<br>";
-    echo " Surname is : " . $_POST['guarantor'] . "<br>";
+    echo " Phone is : " . $_POST['Phone'] . "<br>";
+    echo " Occupation is : " . $_POST['occupation'] . "<br>";
+    echo " Salary is : " . $_POST['salary'] . "<br>";
+    echo " Email is : " . $_POST['email'] . "<br>";
+    echo " Guarantor is : " . $_POST['guarantor'] . "<br>";
 
 
 
-    $sql = "Insert into persons (firstname, lastname, DOB)
+    $sql = "Insert into bankprog (Firstname, Surname, dob)
     VALUES ('$_POST[firstname]' , '$_POST[surname]', ' $_POST[address]', ' $_POST[eircode]' , ' $_POST[dob]'
     , ' $_POST[telephone]' , ' $_POST[occupation]' , ' $_POST[salary]' , ' $_POST[email]' , ' $_POST[guarantor]')";
 

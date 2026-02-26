@@ -22,4 +22,4 @@
     <form action="openCurrentAcc.html"method="POST">
         <br>
         <input type="submit"value="Return to Insert Page"/>
-    </form>
+    </form> 

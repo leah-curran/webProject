@@ -149,3 +149,16 @@ input{
   
   
 }
+
+.depositBody {
+  text-align: center;
+  margin: 15% auto;
+  width: fit-content;
+  position: relative;
+  border: #76c8e6 solid 2px;
+  padding: 20px;
+  width: 40%;
+  height: 60%;
+  border-radius: 25px;
+  background-color: #76c8e6;
+}

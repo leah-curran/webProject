@@ -1,32 +1,34 @@
 <?php
-include 'db.inc.php'; // include the database connection
-date_default_timezone_set("UTC"); // set the default timezone to UTC
-echo "The details sent down are: <br>"; // display the details sent from the form
+include 'db.inc.php';
+date_default_timezone_set("UTC");
 
-$date=date_create($_POST['opened_date']); // create a date object from the date of birth sent from the form
+$sql= "SELECT * from customers where CustId = " . $_POST('personid');
 
-echo "Opened Date is :" . date_format($date,"d/m/Y") . "<br>"; // display the date of birth in the format of day/month/year
-echo "Balance is :" . $_POST['initial_deposit'] . "<br>"; // display the surname sent from the form
-echo "Status is : open" . "<br>"; // display the account type sent from the form
-echo "Customer ID is :" . $_POST['cust_id'] . "<br>"; // display the account type sent from the form
+$result = mysqli_query($con,$sql);
 
-$sql = "Insert into depositacc (OpenedDate, Balance, Status, CustId)
-VALUES ('$_POST[opened_date]',$_POST[initial_deposit],'1',$_POST[cust_id])"; // create an SQL query to insert the details into the persons table
+$rowcount =mysqli_affected_rows($con);
 
-// execute the SQL query and check if it was successful
-if (!mysqli_query($con,$sql))
-    {
-        die("An Error in the SQL Query: " . mysqli_error($con));
-    }
-// display a message confirming that a record has been added for the person
-echo "<br>A record has been added for Customer ID " . $_POST['cust_id'] . ".";
+if ($rowcount == 1)
+{
+    echo "<br> The details of the selected person are <br> <br>";
+    echo "The customerId is : " . $_POST['CustId' ] . "<br> <br>" ;
+    echo "First Name is :" . $row['Firstname'] . "<br>";
+    echo "Surname is :" . $row['Surname'] . "<br>";
+    echo "Address is :" . $row['Address'] . "<br>";
+    
+    
 
-// close the database connection
-mysqli_close($con);
+    echo "Opening Balance is :" . $row['Balance'] . "<br>";
+    $date= date_create($_POST['dob']);
+    echo "Date of Birth is :" . date_format($date,"d/m/Y") . "<br>";
 
+}
+else if ($rowcount == 0)
+        {echo "No matching records" ;}
+    mysqli_close($con) ;
 ?>
-<!-- create a form that when you press the return button you return to the OpenDepositAccount page -->
-<form action = "OpenDepositAccount.html" method = "POST">
+<!-- create a form that when you press the return button you return to the OpenLoanAccount page -->
+<form action = "OpenLoanAcc.html" method = "POST">
 <br>
     <input type="submit" value = "Return to Insert Page"/>
 </form>

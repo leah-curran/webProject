@@ -26,18 +26,19 @@
     </div>
     <div class="loanbody">
       <form action="OpenLoan.php" method="post">
-          <p><label for = "name"> Customer Name</label>
-            <input type ="text" name = "name" id = "name" placeholder="name" autocomplete= off required></p>
-        <p><label for = "address"> Address</label>
-            <input type ="text" name = "address" id = "address" placeholder="address" autocomplete= off required></p>
-             <p><label for = "eircode"> Eircode</label>
-            <input type ="text" name = "eircode" id = "eircode" placeholder="eircode" autocomplete= off required></p>
-        <p><label for = "dob"> Date Of Birth</label>
-            <input type ="date" name = "dob" id = "dob" placeholder="date of birth" required></p>
+           <p><label > Enter the PersonID of the record you want to view
+             <input type ="text" name = "personid" id = "personid" placeholder="Person ID" autocomplete= off required>
+         </label> </p>
+          
+           <p><label > Enter Opening Balance
+             <input type ="number" step = ".01" name = "bal" id = "bal" placeholder="Balance" autocomplete= off required>
+         </label>
+           </p>
+         <input type="submit" value = "Submit"/>
+        <input type="reset" value = "Clear"/>
+    
         <br>
 
-        <input type="submit" value = "Submit"/>
-        <input type="reset" value = "Clear"/>
 
     </form>
     </div>
