@@ -1,6 +1,6 @@
 <!doctype html>
 <head>
-<title>Amend / View a Deposit Account</title>
+<title>Close Deposit Result</title>
 <link rel="stylesheet" href="draft.css" />
 </head>
 
@@ -16,18 +16,9 @@
 <a href="DepositAccountHistory.html">History</a>
 </nav>
 
-<h1>Amend / View a Deposit Account</h1>
-
-<form action="amend_view_deposit.php" method="post">
-<label>Deposit Account ID
-<input type="number" name="deposit_id" required />
-</label>
-<button type="submit" name="action" value="view">View</button>
-<button type="submit" name="action" value="amend">Amend</button>
-</form>
+<h1>Close Deposit Account</h1>
 
 <p><a href="MainMenu.html">Return to Main Menu</a></p>
-
 </main>
 </body>
 </html>
