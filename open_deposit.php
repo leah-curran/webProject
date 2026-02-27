@@ -7,11 +7,11 @@ $date=date_create($_POST['opened_date']); // create a date object from the date 
 
 echo "Opened Date is :" . date_format($date,"d/m/Y") . "<br>"; // display the date of birth in the format of day/month/year
 echo "Balance is :" . $_POST['initial_deposit'] . "<br>"; // display the surname sent from the form
-echo "Status is :" . $_POST['status'] . "<br>"; // display the account type sent from the form
+echo "Status is : open" . "<br>"; // display the account type sent from the form
 echo "Customer ID is :" . $_POST['cust_id'] . "<br>"; // display the account type sent from the form
 
 $sql = "Insert into project (opened_date, balance, status, cust_id)
-VALUES ('$_POST[opened_date]',$_POST[initial_deposit],'$_POST[status]',$_POST[cust_id])"; // create an SQL query to insert the details into the persons table
+VALUES ('$_POST[opened_date]',$_POST[initial_deposit],'1',$_POST[cust_id])"; // create an SQL query to insert the details into the persons table
 
 // execute the SQL query and check if it was successful
 if (!mysqli_query($con,$sql))
