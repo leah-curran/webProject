@@ -2,17 +2,16 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="draft.css">
     <title>Account Maintenance</title>
 </head>
 <body>
-   
     <div class="nav">
-     <img src="pics/logo.jpg" width="100" height="100">
-     <div class="links">
+    <img src="pics/logo.jpg" width="100" height="100">
+    <div class="links">
     <ul><li><A HREF="MainMenu.html">Home</A></li>
 <li><A HREF="withdrawals.html">Withdrawals</A></li>
 <li><A HREF="Lodgements.html">Lodgements</A></li>
@@ -25,22 +24,11 @@
 </ul></div>
     </div>
     <div class="loanbody">
-      <form action="OpenLoan.php" method="post">
-           <p><label > Enter the PersonID of the record you want to view
-             <input type ="text" name = "personid" id = "personid" placeholder="Person ID" autocomplete= off required>
-         </label> </p>
-          
-           <p><label > Enter Loan Amount
-             <input type ="number" step = ".01" name = "bal" id = "bal" placeholder="Balance" autocomplete= off required>
-         </label>
-           </p>
-         <input type="submit" value = "Submit"/>
-        <input type="reset" value = "Clear"/>
-    
-        <br>
-
-
-    </form>
+        <form action="AmendViewLoan.php" method = "post">
+            <label>Loan Account ID</label>
+            <input type="number" name="loanid" required>
+        </label>
+        <button type="submit" name="action" value="view">View</button>
+        <button type="submit" name="action" value="amend">Amend</button>
+        </form>
     </div>
-</body>
-</html>

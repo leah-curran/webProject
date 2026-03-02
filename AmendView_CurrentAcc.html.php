@@ -8,7 +8,7 @@
 <body>
     <h1>Amend/View a Student</h1>
     <h4>Please Select a student and then click the amend button if you wish to update</h4>
-    <?php include 'ListBox.php'; ?>
+    <?php include 'currentAccListbox.php'; ?>
     <script>
         //function to put the values
         function populate()

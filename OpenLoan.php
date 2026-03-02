@@ -2,28 +2,47 @@
 include 'db.inc.php';
 date_default_timezone_set("UTC");
 
-$sql= "SELECT * from customer where CustId = " . $_POST('personid');
+$sql= "SELECT * from customer where CustId = " . $_POST['personid'];
 
 $result = mysqli_query($con,$sql);
 
 $rowcount =mysqli_affected_rows($con);
 
-if ($rowcount == 1)
+if ($row = mysqli_fetch_array($result))
 {
     echo "<br> The details of the selected person are <br> <br>";
-    echo "The customerId is : " . $_POST['CustId' ] . "<br> <br>" ;
+    echo "The customerId is : " . $row['CustId' ] . "<br> <br>" ;
     echo "First Name is :" . $row['Firstname'] . "<br>";
     echo "Surname is :" . $row['Surname'] . "<br>";
     echo "Address is :" . $row['Address'] . "<br>";
-    echo "AccountID is :" . $row['LoanAccId'] . "<br>";
-    echo "Opening Balance is :" . $row['Balance'] . "<br>";
-    $date= date_create($_POST['dob']);
+    $date= date_create($row['dob']);
     echo "Date of Birth is :" . date_format($date,"d/m/Y") . "<br>";
-
 }
+
 else if ($rowcount == 0)
 {echo "No matching records" ;}
-    mysqli_close($con) ;
+ 
+$monthlyPayment=$_POST['bal'] /12;
+        $sql = "INSERT INTO loanacc (LoanAmount, MonthlyPayment, AmountOwing, status)"
+        . "VALUES ('$_POST[bal]', $monthlyPayment,'$_POST[bal]', 'open')";
+    $sql = "SELECT * from loanacc where LoanAccId =" . LAST_INSERT_ID();
+
+
+$result = mysqli_query($con,$sql);
+
+$rowcount =mysqli_affected_rows($con);
+
+if ($row = mysqli_fetch_array($result))
+{
+    echo "<br> The details of your loan are <br> <br>";
+    echo "Loan Account Id is : " . $row['LoanAccId' ] . "<br> <br>" ;
+    echo "Loan Amount :" . $row['LoanAmount'] . "<br>";
+    echo "Your Monthly Payment :" . $row['MonthlyPayment'] . "<br>";
+    echo "The Amount Owed :" . $row['AmountOwing'] . "<br>";
+    echo "Status is :" . $row['Status'] . "<br>";
+}
+
+
 ?>
 <!-- create a form that when you press the return button you return to the OpenLoanAccount page -->
 <form action = "OpenLoanAcc.html" method = "POST">
