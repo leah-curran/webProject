@@ -162,3 +162,45 @@ input{
   border-radius: 25px;
   background-color: #76c8e6;
 }
+
+/* Styles for the customer confirmation box */
+.depositBody #customerDetails
+{
+  background-color: #76c8e6;
+  color: rgb(0, 0, 0);
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 10px;
+  text-align: left;
+}
+
+/* Style for the search button to match the form */
+.depositBody button
+{
+  background-color: #76c8e6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-family: "Comfortaa", sans-serif !important;
+  font-weight: bolder;
+  font-optical-sizing: auto;
+  font-size:96%;
+}
+
+.depositBody button:hover
+{
+  color: rgb(90, 135, 194);
+}
+
+.depositBody select
+{
+  border-radius: 3px;
+  background-color: #83cde7;
+  border-color: black;
+  padding: 5px;
+  font-family: "Comfortaa", sans-serif !important;
+  font-optical-sizing: auto;
+  font-size:96%;
+}
