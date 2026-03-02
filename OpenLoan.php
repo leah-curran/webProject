@@ -2,7 +2,7 @@
 include 'db.inc.php';
 date_default_timezone_set("UTC");
 
-$sql= "SELECT * from customers where CustId = " . $_POST('personid');
+$sql= "SELECT * from customer where CustId = " . $_POST('personid');
 
 $result = mysqli_query($con,$sql);
 
@@ -15,16 +15,14 @@ if ($rowcount == 1)
     echo "First Name is :" . $row['Firstname'] . "<br>";
     echo "Surname is :" . $row['Surname'] . "<br>";
     echo "Address is :" . $row['Address'] . "<br>";
-    
-    
-
+    echo "AccountID is :" . $row['LoanAccId'] . "<br>";
     echo "Opening Balance is :" . $row['Balance'] . "<br>";
     $date= date_create($_POST['dob']);
     echo "Date of Birth is :" . date_format($date,"d/m/Y") . "<br>";
 
 }
 else if ($rowcount == 0)
-        {echo "No matching records" ;}
+{echo "No matching records" ;}
     mysqli_close($con) ;
 ?>
 <!-- create a form that when you press the return button you return to the OpenLoanAccount page -->

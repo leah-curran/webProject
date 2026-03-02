@@ -12,7 +12,7 @@
 
     echo " Date of Birth is : " . date_format($date, "d/m/Y") . "<br>";
 
-    echo " Phone is : " . $_POST['Phone'] . "<br>";
+    echo " Phone is : " . $_POST['telephone'] . "<br>";
     echo " Occupation is : " . $_POST['occupation'] . "<br>";
     echo " Salary is : " . $_POST['salary'] . "<br>";
     echo " Email is : " . $_POST['email'] . "<br>";
@@ -20,7 +20,7 @@
 
 
 
-    $sql = "Insert into bankprog (Firstname, Surname, dob)
+    $sql = "Insert into customer (Firstname, Surname,Address, eircode, dob, Phone, occupation, salary, Email, guarantor)
     VALUES ('$_POST[firstname]' , '$_POST[surname]', ' $_POST[address]', ' $_POST[eircode]' , ' $_POST[dob]'
     , ' $_POST[telephone]' , ' $_POST[occupation]' , ' $_POST[salary]' , ' $_POST[email]' , ' $_POST[guarantor]')";
 
