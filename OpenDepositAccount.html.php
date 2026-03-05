@@ -1,6 +1,9 @@
 <!doctype html>
 <head>
 <title>Open a Deposit Account</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="draft.css" />
 </head>
 <body>
@@ -45,7 +48,7 @@
 <label>Or Select Customer by Name
 <?php
 include 'db.inc.php';
-$sql = "SELECT CustId, Firstname, Surname, Phone, Email FROM customer";
+$sql = "SELECT CustId, Firstname, Surname, Phone, Email, eircode, dob FROM customer";
 if (!$result = mysqli_query($con, $sql))
     {
         die('Error in querying the database' . mysqli_error($con));
@@ -54,13 +57,15 @@ echo "<select id='cust_select' onchange='lookupBySelect()'>";
 echo "<option value=''>-- Select a Customer --</option>";
 while ($row = mysqli_fetch_array($result))
     {
-        $id      = $row['CustId'];
-        $fname   = $row['Firstname'];
-        $sname   = $row['Surname'];
-        $phone   = $row['Phone'];
-        $email   = $row['Email'];
+        $id = $row['CustId'];
+        $fname = $row['Firstname'];
+        $sname = $row['Surname'];
+        $phone = $row['Phone'];
+        $email = $row['Email'];
+        $eircode = $row['eircode'];
+        $dob = $row['dob'];
         // Pack all the data into the value so JS can split it out
-        $allText = "$id,$fname,$sname,$phone,$email";
+        $allText = "$id,$fname,$sname,$phone,$email,$eircode,$dob";
         echo "<option value='$allText'>$fname $sname</option>";
     }
 echo "</select>";
