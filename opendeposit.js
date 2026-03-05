@@ -35,7 +35,7 @@ function lookupBySelect()
         {
             // Split the packed value back into individual pieces
             var parts = selected.split(",");
-            var id = parts[0];
+            var id    = parts[0];
             var fname = parts[1];
             var sname = parts[2];
             var phone = parts[3];

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="draft.css" />
 <?php
 include 'db.inc.php';
 date_default_timezone_set("UTC");
@@ -23,24 +24,28 @@ else if ($rowcount == 0)
 {echo "No matching records" ;}
  
 $monthlyPayment=$_POST['bal'] /12;
-        $sql = "INSERT INTO loanacc (LoanAmount, MonthlyPayment, AmountOwing, status)"
-        . "VALUES ('$_POST[bal]', $monthlyPayment,'$_POST[bal]', 'open')";
-    $sql = "SELECT * from loanacc where LoanAccId =" . LAST_INSERT_ID();
+        $sql = "INSERT INTO loanacc (CustID,LoanAmount, MonthlyPayment, AmountOwing, status)"
+        . "VALUES ('$_POST[personid]','$_POST[bal]', $monthlyPayment,'$_POST[bal]', 'open')";
+   
+if (!mysqli_query ($con, $sql))
+    {
+        die('Error in querying the database' . mysqli_error($con));
+    }
 
 
-$result = mysqli_query($con,$sql);
+ $sql = "SELECT * from loanacc innerjoin customer on customer.CustID = loanacc.CustID where CustID =" . $_POST['personid'] ;
+ $result = mysqli_query($con,$sql);
 
 $rowcount =mysqli_affected_rows($con);
 
-if ($row = mysqli_fetch_array($result))
-{
+
+
     echo "<br> The details of your loan are <br> <br>";
-    echo "Loan Account Id is : " . $row['LoanAccId' ] . "<br> <br>" ;
-    echo "Loan Amount :" . $row['LoanAmount'] . "<br>";
-    echo "Your Monthly Payment :" . $row['MonthlyPayment'] . "<br>";
-    echo "The Amount Owed :" . $row['AmountOwing'] . "<br>";
-    echo "Status is :" . $row['Status'] . "<br>";
-}
+    echo "Loan Amount :" . $_POST['bal'] . "<br>";
+    echo "Your Monthly Payment :" . $monthlyPayment . "<br>";
+    echo "The Amount Owed :" . $_POST['bal'] . "<br>";
+    echo "Status is : Open <br>";
+
 
 
 ?>

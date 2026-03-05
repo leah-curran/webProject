@@ -118,6 +118,7 @@ a:hover {
   border-radius: 3%;
   margin: 15% auto; 
   position: relative;
+  height: fit-content;
   
   
 }
@@ -138,7 +139,7 @@ input{
   background-repeat: round;
   color: rgb(0, 0, 0);
   text-align: center;
-   font-family: "Comfortaa", sans-serif !important;
+  font-family: "Comfortaa", sans-serif !important;
   font-optical-sizing: auto;
   font-size:100%;
   font-weight: bolder;
@@ -149,7 +150,15 @@ input{
   
   
 }
-
+.currentAccBody
+{
+  text-align: center;
+  margin: auto;
+  width: fit-content;
+  position: relative;
+  background-color: #76c8e6 ; 
+  padding: 30px;
+}
 .depositBody {
   text-align: center;
   margin: 15% auto;
