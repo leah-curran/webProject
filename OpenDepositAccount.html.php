@@ -5,6 +5,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="draft.css" />
+<script src="opendeposit.js"></script>
 </head>
 <body>
 <div class="nav">
@@ -94,13 +95,13 @@ mysqli_close($con);
 <!-- Step 3: Account details form -->
 <h3>Step 3: Account Details</h3>
 <br>
-<form action="open_deposit.php" method="post">
+<form action="open_deposit.php" method="post" onsubmit="return validation()">
 
 <!-- Hidden field to pass the customer ID into the form -->
 <input type="hidden" name="cust_id" id="cust_id" />
 
 <label>Date Opened
-<input type="date" name="opened_date" required />
+<input type="date" name="opened_date" id="opened_date" required placeholder="YYYY-MM-DD" title="Please enter a date in the format YYYY-MM-DD" />
 </label>
 <br><br>
 
@@ -129,11 +130,12 @@ mysqli_close($con);
 <br><br>
 
 <label>Initial Deposit ($)
-<input type="number" name="initial_deposit" step="0.01" min="0" required />
+<input type="number" name="initial_deposit" id="initial_deposit" step="0.01" min="0" required placeholder="0.00" title="Please enter a valid deposit amount" />
 </label>
 <br><br>
 
 <button type="submit">Open Account</button>
+<button type="reset">Reset Form</button>
 </form>
 </div>
 
