@@ -30,18 +30,18 @@
     <script>
         function confirmCheck()
         {
-            return confirm("Is the information correct?");
+            var response;
+            response = confirm('Are you sure you want to save these changes?');
+            if(response)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     </script>
-    <div class="nav">
-     <img src="pics/logo.jpg" width="100" height="100">
-     <div class="links">
-        <!-- the top bar menu to navigate between pages -->
-    <ul><li><A HREF="AccountMaintenance.html">Home</A></li>
-    <li><A HREF="openCurrentAcc.html">Open Current Account</A></li>
-
-    </ul></div>
-    </div>
     <!-- this will move to the open current acc php file but will also run the confirm check function on submit -->
 <main>
 <div class = "currentAccBody">
@@ -63,7 +63,7 @@
 <label>2.Select Customer by Name
 <?php
 include 'db.inc.php';
-$sql = "SELECT CustId, Firstname, Surname, Phone, Email FROM customer";
+$sql = "SELECT CustId, Firstname, Surname, Phone, Email, eircode, dob FROM customer";
 if (!$result = mysqli_query($con, $sql))
     {
         die('Error in querying the database' . mysqli_error($con));
@@ -77,6 +77,8 @@ while ($row = mysqli_fetch_array($result))
         $sname   = $row['Surname'];
         $phone   = $row['Phone'];
         $email   = $row['Email'];
+        $eircode = $row['eircode'];
+        $dob     = $row['dob'];
         // Pack all the data into the value so JS can split it out
         $allText = "$id,$fname,$sname,$phone,$email";
         echo "<option value='$allText'>$fname $sname</option>";
@@ -107,12 +109,12 @@ mysqli_close($con);
 <!--Account details form -->
 <h3> Account Details</h3>
 <br>
-<form action="openCurrentAcc.php" method="post">
+<form action="openCurrentAcc.php" method="post" onsubmit="return confirmCheck()">
 
 <!-- Hidden field to pass the customer ID into the form -->
 <input type="hidden" name="cust_id" id="cust_id" />
 <label>How much money you want to put in?
-    <input type="text" name="Balance" required/>
+    <input type="text" name="Balance" id="Balance" required/>
 </label>
 <br><br>
 
@@ -123,3 +125,4 @@ mysqli_close($con);
 
 </body>
 </html>
+

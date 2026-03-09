@@ -7,9 +7,9 @@
    $date=date("d-M-Y");
    echo "Date Opened is: ".date("d-M-Y");
    $status="User";
-   $sql="INSERT INTO currentacc (CurrentAccountID,Balance,DateOpened,Status) 
-   VALUES('$_POST[cust_id]','$_POST[Balance]','$date','$status')";
-   echo  "<br>A record has been added for ".$_POST['cust_id']."".$_POST['Balance']."".$date."".$status."";
+   $sql="INSERT INTO currentacc (Balance,DateOpened) 
+   VALUES('$_POST[Balance]','$date')";
+   echo  "<br>A record has been added for ".$_POST['cust_id']."".$_POST['Balance']."".$date."";
    // Execute the SQL query and check if it was successful
 if (!mysqli_query($con, $sql))
     {

@@ -24,8 +24,8 @@ else if ($rowcount == 0)
 {echo "No matching records" ;}
  
 $monthlyPayment=$_POST['bal'] /12;
-        $sql = "INSERT INTO loanacc (CustID,LoanAmount, MonthlyPayment, AmountOwing, status)"
-        . "VALUES ('$_POST[personid]','$_POST[bal]', $monthlyPayment,'$_POST[bal]', 'open')";
+        $sql = "INSERT INTO loanacc (CustID,LoanAmount,DateOpened, MonthlyPayment, AmountOwing, status)"
+        . "VALUES ('$_POST[personid]','$_POST[bal]','$_POST[opened_date]', $monthlyPayment,'$_POST[bal]', 'open')";
    
 if (!mysqli_query ($con, $sql))
     {
@@ -44,6 +44,7 @@ $rowcount =mysqli_affected_rows($con);
     echo "Loan Amount :" . $_POST['bal'] . "<br>";
     echo "Your Monthly Payment :" . $monthlyPayment . "<br>";
     echo "The Amount Owed :" . $_POST['bal'] . "<br>";
+    $date= date_create($row['opened_date']);
     echo "Status is : Open <br>";
 
 

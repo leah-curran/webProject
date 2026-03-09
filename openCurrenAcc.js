@@ -34,20 +34,22 @@ function lookupBySelect()
     if (selected)
         {
             // Split the packed value back into individual pieces
-            var parts = selected.split(",");
-            var id    = parts[0];
-            var fname = parts[1];
-            var sname = parts[2];
-            var phone = parts[3];
-            var email = parts[4];
+            var parts   = selected.split(",");
+            var id      = parts[0];
+            var fname   = parts[1];
+            var sname   = parts[2];
+            var phone   = parts[3];
+            var email   = parts[4];
+            var eircode = parts[5];
+            var dob     = parts[6];
 
             // Fill in the confirmation fields
             document.getElementById("disp_id").innerHTML = id;
             document.getElementById("disp_name").innerHTML = fname + " " + sname;
             document.getElementById("disp_phone").innerHTML = phone;
             document.getElementById("disp_email").innerHTML = email;
-            document.getElementById("disp_eircode").innerHTML = "N/A";
-            document.getElementById("disp_dob").innerHTML = "N/A";
+            document.getElementById("disp_eircode").innerHTML = eircode;
+            document.getElementById("disp_dob").innerHTML = dob;
 
             // Copy the customer ID into the hidden form field so it gets sent to PHP
             document.getElementById("cust_id").value = id;
