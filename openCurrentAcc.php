@@ -7,9 +7,9 @@
    $date=date("d-M-Y");
    echo "Date Opened is: ".date("d-M-Y");
    $status="User";
-   $sql="INSERT INTO currentacc (Balance,DateOpened) 
-   VALUES('$_POST[Balance]','$date')";
-   echo  "<br>A record has been added for ".$_POST['cust_id']."".$_POST['Balance']."".$date."";
+   $sql="INSERT INTO currentacc (overdraft,DateOpened) 
+   VALUES('$_POST[overdraft]','$date')";
+   echo  "<br>A record has been added for cust id:".$_POST['cust_id']." with an overdraft limit of:".$_POST['overdraft']."£ ".$date."";
    // Execute the SQL query and check if it was successful
 if (!mysqli_query($con, $sql))
     {
