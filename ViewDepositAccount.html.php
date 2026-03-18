@@ -56,6 +56,14 @@ Purpose:   View page to view a deposit account for an already existing customer
 
 <br><br>
 
+<!-- Call a javascript function to look up the customer by account number -->
+<label>Enter Account Number
+<input type="number" id="acc_id_lookup" name="acc_id_lookup" title="Please enter a valid account number" placeholder="1" />
+</label>
+<button type="button" onclick="lookupByAccountNumber()">Search</button>
+
+<br><br>
+
 <label>Or Select Customer by Name
     <?php
     include 'db.inc.php';
@@ -81,6 +89,24 @@ Purpose:   View page to view a deposit account for an already existing customer
             echo "<option value='$allText'>$fname $sname</option>";
         }
     echo "</select>";
+
+    // Hidden select packed with all open deposit account data for JS to loop through
+    // This is needed to link the customer to their accounts for the account selection step as customers can have multiple accounts
+    $sql2 = "SELECT DepositAccountId, CustId, Balance FROM depositacc WHERE DeletedFlag = 0";
+    if (!$result2 = mysqli_query($con, $sql2))
+        {
+            die('Error in querying the database' . mysqli_error($con));
+        }
+    echo "<select id='acc_data' style='display:none'>";
+    while ($row2 = mysqli_fetch_array($result2))
+        {
+            $accId = $row2['DepositAccountId'];
+            $custId = $row2['CustId'];
+            $balance = $row2['Balance'];
+            // Put the customer ID, account ID and balance in the value so JS can link customers to accounts and validate balance when closing
+            echo "<option value='$custId,$accId,$balance'></option>";
+        }
+    echo "</select>";
     mysqli_close($con);
     ?>
 </label>
@@ -98,6 +124,35 @@ Purpose:   View page to view a deposit account for an already existing customer
 <p><strong>Email:</strong> <span id="disp_email"></span></p>
 <p><strong>Eircode:</strong> <span id="disp_eircode"></span></p>
 <p><strong>Date of Birth:</strong> <span id="disp_dob"></span></p>
+<p><strong>Address:</strong> <span id="disp_address"></span></p>
+<br>
+<p>If the details above are correct, please select the account to close below.</p>
+<hr>
+<br>
+
+<!-- Step 3: Select Account -->
+<h3>Step 3: Select Account</h3>
+<br>
+<label>Deposit Account
+<!-- This dropdown is populated with Account IDs linked to the customer after the lookup step. It is populated by JS by looping through the hidden acc_data select and matching the customer ID -->
+<select id="acc_select" onchange="selectAccount()">
+    <option value="">-- Select an Account --</option>
+</select>
+</label>
+
+<br><br>
+
+<!-- Account details shown after account is picked -->
+<div id="accountDetails" style="display:none;">
+<hr>
+<h3>Step 4: Confirm Account Details</h3>
+<br>
+<p><strong>Account Number:</strong> <span id="disp_acc_id"></span></p>
+<!-- Account can't be closed if balance isn't zero, show the balance here for confirmation -->
+<p><strong>Balance:</strong> &euro;<span id="disp_balance"></span></p>
+<br>
+<p>Please confirm the details above before closing the account.</p>
+<hr>
 <br>
 
 <form action="view_deposit.php" method="POST">
