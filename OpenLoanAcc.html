@@ -6,8 +6,36 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="draft.css">
-    <title>Account Maintenance</title>
+    <title>Open Loan Account</title>
 </head>
+	<script>
+	function confirmCheck()
+                {
+					var opendate = document.getElementById("opened_date").value;
+					const today = new Date().toISoString().split("T")[0];
+					document.getElementById("opened_date").setAttribute("min",today);
+					if (opendate>today)
+					{
+						alert("Invalid Date");
+						return false;
+					}
+                    var custId = document.getElementById("personid").value;
+					if (!custId)
+					{
+						alert("Please enter a person id ");
+						return false;
+					}
+					var openBal = document.getElementById("bal").value;
+					if (!openBal || openBal < 0)
+					{
+						alert("Please enter a valid opening balance ");
+						return false;
+					}
+					else{	
+                    var response = confirm('Are you sure you want to submit the form?');
+					return response;}
+				}
+                    </script>
 <body>
    
     <div class="nav">
@@ -24,23 +52,22 @@
 <li><A HREF="ChangePassword.html">Change Password</A></li>
 </ul></div>
     </div>
-    <div class="loanbody">
-      <form action="OpenLoan.php" method="post">
-           <p><label > Enter the PersonID of the record you want to view
-             <input type ="text" name = "personid" id = "personid" placeholder="Person ID" autocomplete= off required>
-         </label> </p>
-          <label>Date Opened
-          <input type="date" name="opened_date" required />
-          </label>
-           <p><label > Enter Loan Amount
+     <div class="loanbody">
+     <form action="OpenLoan.php" method="post" onsubmit="return confirmCheck()">
+           <label > Enter the PersonID</label>
+             <input type ="text" name = "personid" id = "personid" placeholder="Person ID" autocomplete= off min = "0" required><br><br>
+            <div class='loanDOB'><label>Date Opened</label>
+				<input type="date" name="opened_date" id="opened_date" required /></div>
+          <br>
+		  <label>Loan Payment Period </label>
+          <input type="number" name="loanperiod" min="12" required /><br><br>
+           <label > Enter Loan Amount</label>
              <input type ="number" step = ".01" name = "bal" id = "bal" placeholder="Balance" autocomplete= off required>
-         </label>
-           </p>
+         <br><br>
          <input type="submit" value = "Submit"/>
         <input type="reset" value = "Clear"/>
     
         <br>
-
 
     </form>
     </div>

@@ -1,35 +1,52 @@
-<?php
+<link rel="stylesheet" type="text/css" href="draft.css"><?php
 
 include 'db.inc.php';
 
-date_default_timezone_set('UTC');
-$dbDate = date("Y-m-d",strtotime($_POST['amendDOB']));
 
-$sql = "UPDATE loanacc SET LoanAmount = '{$_POST['amendloanamount']}', 
-MonthlyPayment = '{$monthlyPayment}',AmountOwing = '{$_POST['amendloanamount']}',status = 'open'
-WHERE CustID = '{$_POST['amendid']}'";
+$monthlyPayment = $_POST['amendloanamount'] / $_POST['amendloanperiod'];
 
-if (! mysqli_query($con,$sql))
+$sql = "UPDATE loanacc 
+        SET LoanAmount = '{$_POST['amendloanamount']}', 
+        MonthlyPayment = '{$monthlyPayment}',
+        AmountOwing = '{$_POST['amendloanamount']}',
+        Status = 'open'
+        WHERE CustID = '{$_POST['amendid']}'";
+
+if (!mysqli_query($con,$sql))
 {
-    die "Error " . mysqli_error($con);
+    die("Error " . mysqli_error($con));
+}
+
+$sql = "SELECT * 
+        FROM loanacc 
+        INNER JOIN customer 
+        ON customer.CustID = loanacc.CustID 
+        WHERE customer.CustID = '{$_POST['amendid']}'";
+
+$result = mysqli_query($con,$sql);   // store result
+
+if ($result)
+{
+    $row = mysqli_fetch_array($result);
+	?><div class='amendloan'>
+<?php
+    echo "Record(s) updated for: ";
+    echo $row['Firstname'] . " " . $row['Surname'];
+    echo "<br> The details of your loan are <br> <br>";
+    echo "Loan Amount :" . $row['LoanAmount'] . "<br>";
+    echo "Your Monthly Payment : €" . number_format($monthlyPayment, 2) . "<br>";
+    echo "The Amount Owed :" .$row['AmountOwing']. "<br>";
 }
 else
 {
-    if (mysqli_affected_rows($con)!= 0)
-    {
-        $sql = "SELECT * from loanacc innerjoin customer on customer.CustID = loanacc.CustID where CustID =" . $_POST['personid'] ;
-        $result = mysqli_query($con,$sql);
-        $row =mysqli_affected_rows($con);
-        echo "record(s) updated for: ";
-        echo .$row['Firstname'] ." ". $row['Lastname'] ;
-    }
-    else{
-        echo "No records were changed";
-    }
+    echo "No records were changed";
 }
+
 mysqli_close($con);
 ?>
-<link rel="stylesheet" type="text/css" href="report.css">
-<form action = "AmendView.html.php" method = "post" >
-<input type = "submit" value = "Return to Previous Screen">
+</div>
+
+
+<form action="AmendViewLoan.html.php" method="post">
+<input type="submit" value="Return to Previous Screen">
 </form>

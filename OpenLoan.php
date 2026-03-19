@@ -3,7 +3,7 @@
 include 'db.inc.php';
 date_default_timezone_set("UTC");
 
-$sql= "SELECT * from customer where CustId = " . $_POST['personid'];
+$sql= "SELECT * from customer where CustId = " . $_POST['personid'] ;
 
 $result = mysqli_query($con,$sql);
 
@@ -22,8 +22,8 @@ if ($row = mysqli_fetch_array($result))
 
 else if ($rowcount == 0)
 {echo "No matching records" ;}
- 
-$monthlyPayment=$_POST['bal'] /12;
+ $loanperiod=$_POST['loanperiod'];
+$monthlyPayment=$_POST['bal'] /$loanperiod;
         $sql = "INSERT INTO loanacc (CustID,LoanAmount,DateOpened, MonthlyPayment, AmountOwing, status)"
         . "VALUES ('$_POST[personid]','$_POST[bal]','$_POST[opened_date]', $monthlyPayment,'$_POST[bal]', 'open')";
    
@@ -33,7 +33,7 @@ if (!mysqli_query ($con, $sql))
     }
 
 
- $sql = "SELECT * from loanacc innerjoin customer on customer.CustID = loanacc.CustID where CustID =" . $_POST['personid'] ;
+ $sql = "SELECT * from loanacc where CustID =" . $_POST['personid'] ;
  $result = mysqli_query($con,$sql);
 
 $rowcount =mysqli_affected_rows($con);
@@ -44,9 +44,25 @@ $rowcount =mysqli_affected_rows($con);
     echo "Loan Amount :" . $_POST['bal'] . "<br>";
     echo "Your Monthly Payment :" . $monthlyPayment . "<br>";
     echo "The Amount Owed :" . $_POST['bal'] . "<br>";
-    $date= date_create($row['opened_date']);
+    echo "Date Opened: " . $_POST['opened_date'] . " <br>";
     echo "Status is : Open <br>";
 
+// Create transaction using loan amount as withdrawal
+$amount = $_POST['bal'];
+$date = date("Y-m-d");
+
+$sqlTrans = "INSERT INTO transaction  (Amount, Type, Date)
+VALUES ('$amount', 'Withdrawal', '$date')";
+
+if (!mysqli_query($con, $sqlTrans))
+{
+    die('Error creating transaction: ' . mysqli_error($con));
+}
+else
+{
+    echo "<br><b>Transaction Successful</b><br>";
+    echo "A withdrawal transaction of €" . $amount . " has been recorded for Customer ID: " .$_POST['personid']. "<br>";
+}
 
 
 ?>

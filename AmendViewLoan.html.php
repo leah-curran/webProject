@@ -8,10 +8,7 @@
     <link rel="stylesheet" href="draft.css">
     <title>Amend/View Loan Account </title>
 </head>
-<h2>Amend/View a loan Account</h2>
-<?php 
-include 'listbox.php'; 
-?>
+
 <script>
     function populate()
             {
@@ -19,22 +16,23 @@ include 'listbox.php';
                 var result;
                 result = sel.options[sel.selectedIndex].value;
                 var personDetails = result.split(',');
-                document.getElementById("display").innerHTML = "The details of the selected person are: " + result;
-                
+                document.getElementById("amendid").value = personDetails[0];
             }
    function toggleLock()
                 {
                     if (document.getElementById("amendViewbutton").value= "Amend Details")
                 {
                         document.getElementById("amendloanamount").disabled = false;
-                        
+					    document.getElementById("amendloanperiod").disabled = false;
+                        document.getElementById("amendid").disabled = false;
                     
                         document.getElementById("amendViewbutton").value= "Amend Details"
                 }
                 else
                 {
                          document.getElementById("amendloanamount").disabled = true;
-                        
+					     document.getElementById("amendloanperiod").disabled = true;
+                        document.getElementById("amendid").disabled = true;
                     
                         document.getElementById("amendViewbutton").value= "Amend Details"
                 }
@@ -44,9 +42,9 @@ function confirmCheck()
                     var response;
                     response = confirm('Are you sure you want to save these changes?');
                     if (response)
-                    {
-                        document.getElementById("amendid").disabled = false;
+					{
                         document.getElementById("amendloanamount").disabled = false;
+						document.getElementById("amendloanperiod").disabled = false;
                         return true;
                     }
                 }
@@ -69,15 +67,21 @@ function confirmCheck()
 </ul></div>
     </div>
     <div class="loanbody">
-                
-    <p id="display"> </p>
-
-    <input type="button" value="Amend Details" id = "amendViewbutton" onclick="toggleLock()">
+    <h2>Amend/View a loan Account</h2>
+		<?php 
+include 'listbox.php'; 
+?><br><br>
+    <input type="button" value="Amend Details" id = "amendViewbutton" onclick="toggleLock()"><br><br>
     <form name="myForm" action="AmendViewLoan.php" onsubmit="return confirmCheck()" method="post">
-    <label for = 'amendid'>Person Id </label>
-    <input type="text" name = "amendid" id = "amendid" disabled>
-    <label for ='amendloanamount'>Loan Amount </label>
-    <input type="text" name= "amendloanamount" id= "amendloanamount" disabled>
+	<label for ='amendid'>PersonID</label>
+    <input type="text" name= "amendid" id= "amendid" disabled> <br><br>
+  			<label>Loan Payment Period</label>
+          <input type="number" name="loanperiod" min="12" required />
+          <br>
+           <p><label > Enter Loan Amount</label>
+             <input type ="number" step = ".01" name = "bal" id = "bal" placeholder="Balance" autocomplete= off required>
+         <br>
+           </p><br>
     
     
     <input type="submit" value="Save Changes" > </form>
