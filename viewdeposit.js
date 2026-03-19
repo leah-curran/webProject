@@ -46,6 +46,7 @@ function lookupBySelect()
             var email   = parts[4];
             var eircode = parts[5];
             var dob     = parts[6];
+            var address = parts[7];
 
             document.getElementById("disp_id").innerHTML      = id;
             document.getElementById("disp_name").innerHTML    = fname + " " + sname;
@@ -53,7 +54,7 @@ function lookupBySelect()
             document.getElementById("disp_email").innerHTML   = email;
             document.getElementById("disp_eircode").innerHTML = eircode;
             document.getElementById("disp_dob").innerHTML     = dob;
-
+            document.getElementById("disp_address").innerHTML = address;
             document.getElementById("cust_id").value = id;
             document.getElementById("customerDetails").style.display = "block";
         }
@@ -143,4 +144,29 @@ function selectAccount()
             // Hide the account details section if no account is selected
             document.getElementById("accountDetails").style.display = "none";
         }
+}
+
+function validation()
+{
+    var custId = document.getElementById("cust_id").value;
+    if (!custId)
+        {
+            alert("Please select a customer before submitting the form.");
+            return false; // Prevent form submission
+        }
+    var delid = document.getElementById("delid").value;
+    if (!delid)
+        {
+            alert("Please select an account to close.");
+            return false; // Prevent form submission
+        }
+    var balance = parseFloat(document.getElementById("balance").value);
+    if (isNaN(balance) || balance > 0)
+        {
+            alert("You cannot close an account with a positive balance. Please withdraw the remaining funds first.");
+            return false; // Prevent form submission
+        }
+    // Requires users to confirm they want to close the account
+    var finalConfirmation = confirm("Are you sure you want to close Account " + delid + "?");
+    return finalConfirmation;
 }

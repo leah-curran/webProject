@@ -1,3 +1,43 @@
+<!--
+Name:      Damon Kelly
+StudentID: C00307057
+Date:      23/02/2026
+Purpose:   php for the add page to open a deposit account for an already existing customer
+-->
+
+<!doctype html>
+<head>
+<title>Open a Deposit Account</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="draft.css" />
+</head>
+<body>
+<div class="nav">
+     <img src="pics/logo.jpg" width="100" height="100">
+     <div class="links">
+    <ul><li><A HREF="MainMenu.html">Home</A></li>
+<li><A HREF="withdrawals.html">Withdrawals</A></li>
+<li><A HREF="Lodgements.html">Lodgements</A></li>
+<li><A HREF="CustomerMaintenance.html">Customer Maintenance</A></li>
+<li><A HREF="AccountMaintenance.html">Account Maintenance</A></li>
+<li><A HREF="Management.html">Management</A></li>
+<li><A HREF="Reports.html">Reports</A></li>
+<li><A HREF="Quotes.html">Quotes</A></li>
+<li><A HREF="ChangePassword.html">Change Password</A></li>
+</ul></div>
+    </div>
+     <div class="submenu">
+       <ul>
+        <P><a href=DepositAccMenu.html>Back to Deposit Account Menu</a></P>
+        <P><a href=AmendViewDeposit.html.php>Amend/View Deposit Account</a></P>    
+        <P><a href=CloseDepositAccount.html.php>Close Deposit Account</a></P>
+       </ul> 
+    </div>
+
+<main>
+<div class = "depositBody">
 <?php
 include 'db.inc.php'; // include the database connection
 date_default_timezone_set("UTC"); // set the default timezone to UTC
@@ -20,7 +60,7 @@ if (!mysqli_query($con, $sql))
         die("An Error in the SQL Query: " . mysqli_error($con));
     }
 
-// Get the new account ID that was automatically generated
+// Get the new account ID that was auto incremented
 $new_account_id = mysqli_insert_id($con);
 
 // Display a message confirming the account was opened
@@ -32,7 +72,9 @@ mysqli_close($con);
 ?>
 
 <!-- Button to return to the Open Deposit Account page -->
-<form action = "OpenDepositAccount.html" method = "POST">
+<form action = "OpenDepositAccount.html.php" method = "POST">
 <br>
     <input type="submit" value = "Return to Insert Page"/>
 </form>
+</div>
+</body>

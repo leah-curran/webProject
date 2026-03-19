@@ -32,7 +32,7 @@ Purpose:   php for the view page to view a deposit account for an already existi
        <ul>
         <P><a href=DepositAccMenu.html>Back to Deposit Account Menu</a></P>
         <P><a href=OpenDepositAccount.html.php>Open a Deposit Account</a></P>
-        <P><a href=CloseDepositAccount.html>Close Deposit Account</a></P>
+        <P><a href=CloseDepositAccount.html.php>Close Deposit Account</a></P>
        </ul>
     </div>
 <main>
@@ -41,7 +41,11 @@ Purpose:   php for the view page to view a deposit account for an already existi
 <?php
 include 'db.inc.php';
 
-$sql = "SELECT * FROM customer WHERE DeletedFlag = 0";
+$custid = $_POST['cust_id'];
+$accountid = $_POST['account_id'];
+
+$sql = "SELECT Firstname, Surname, CustId, DepositAccountId, Balance, OpenedDate FROM customer 
+inner join depositacc ON customer.CustId = depositacc.CustId AND customer.DeletedFlag = 0 AND depositacc.DeletedFlag = 0";
 
 if (!$result = mysqli_query($con, $sql))
     {

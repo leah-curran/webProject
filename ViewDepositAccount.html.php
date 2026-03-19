@@ -157,6 +157,7 @@ Purpose:   View page to view a deposit account for an already existing customer
 
 <form action="view_deposit.php" method="POST">
     <input type="hidden" name="cust_id" id="cust_id" />
+    <input type="hidden" name="account_id" id="account_id"/>
     <button type="submit">View Account</button>
 </form>
 </div>
