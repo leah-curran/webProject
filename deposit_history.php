@@ -2,18 +2,20 @@
 Name:      Damon Kelly
 StudentID: C00307057
 Date:      02/03/2026
-Purpose:   php for the view page to view a deposit account for an already existing customer
+Purpose:   php for the history page to view a deposit account history for an already existing customer
 -->
 
 <!doctype html>
 <head>
-<title>View a Deposit Account</title>
+<title>Deposit Account History</title>
+<!-- default styling -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="draft.css" />
 </head>
 <body>
+<!-- menu links -->
 <div class="nav">
      <img src="pics/logo.jpg" width="100" height="100">
      <div class="links">
@@ -28,10 +30,11 @@ Purpose:   php for the view page to view a deposit account for an already existi
 <li><A HREF="ChangePassword.html">Change Password</A></li>
 </ul></div>
     </div>
+    <!-- submenu for links to other deposit pages -->
      <div class="submenu">
        <ul>
-        <P><a href=DepositAccMenu.html>Back to Deposit Account Menu</a></P>
         <P><a href=OpenDepositAccount.html.php>Open a Deposit Account</a></P>
+        <P><a href=ViewDepositAccount.html.php>View a Deposit Account</a></P>
         <P><a href=CloseDepositAccount.html.php>Close Deposit Account</a></P>
        </ul>
     </div>
@@ -41,6 +44,7 @@ Purpose:   php for the view page to view a deposit account for an already existi
 <?php
 include 'db.inc.php';
 
+// get the customer and account ids from the form
 $custid = $_POST['cust_id'];
 $accountid = $_POST['account_id'];
 
@@ -54,6 +58,8 @@ if (!$result = mysqli_query($con, $sql))
     }
 
 $row = mysqli_fetch_array($result);
+$id = $row["DepositAccountId"];
+$name = $row["Firstname"] . " " . $row['Surname'];
 echo "<h2>Account Details</h2>";
 echo "<p><strong>Customer:</strong> " . $row['Firstname'] . " " . $row['Surname'] . "</p>";
 echo "<p><strong>Customer ID:</strong> " . $row['CustId'] . "</p>";
@@ -61,7 +67,18 @@ echo "<p><strong>Account Number:</strong> " . $row['DepositAccountId'] . "</p>";
 echo "<p><strong>Balance:</strong> &euro;" . $row['Balance'] . "</p>";
 echo "<p><strong>Opened Date:</strong> " . $row['OpenedDate'] . "</p>";
 
-$sql2 = "SELECT * FROM `transaction` WHERE DepositAccountId = " . $_POST['account_id'] . " ORDER BY Date LIMIT 10";
+$start = $_POST["start_date"];
+$end = $_POST["end_date"];
+
+if ($start && $end)
+    {
+        $sql2 = "SELECT * FROM `transaction` WHERE DepositAccountId = " . $_POST['account_id'] . " AND Date BETWEEN '" . $start . "' AND '" . $end . "' ORDER BY Date";
+    }
+
+else
+    {
+        $sql2 = "SELECT * FROM `transaction` WHERE DepositAccountId = " . $_POST['account_id'] . " ORDER BY Date";
+    }
 
 if (!$result2 = mysqli_query($con, $sql2))
     {
@@ -72,12 +89,14 @@ $transactionCount = mysqli_num_rows($result2);
 
 if ($transactionCount == 0)
     {
-        echo "<p>No transactions were founf for this account!</p>";
+        echo "<p>No transactions were found for this account!</p>";
     }
 else
     {
+        echo "<u>Deposit Account History</u><br><br>";
+        echo "Account Number: " . $id . "         Customer Name: " . $name . "<br><br>";
         echo "<table>";
-        echo "<tr><th>Date</th><th>Type</th><th>Amount</th><th>Balance</th></tr>";
+        echo "<tr><th>Date</th><th>Transaction Type</th><th>Transaction Amount</th><th>Balance</th></tr>";
         while ($row = mysqli_fetch_array($result2))
             {
                 $date = $row["Date"];

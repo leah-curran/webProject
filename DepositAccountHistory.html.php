@@ -153,9 +153,21 @@ Purpose:   History page to view a deposit account history for an already existin
 <hr>
 <br>
 
-<form action="view_deposit.php" method="post">
+<form action="deposit_history.php" method="post" onsubmit="dateValidate()">
     <input type="hidden" name="cust_id" id="cust_id" />
     <input type="hidden" name="account_id" id="account_id"/>
+
+    <!-- Date field, pattern yyyy-mm-dd -->
+    <label>Start date
+    <input type="date" name="start_date" id="start_date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" placeholder="YYYY-MM-DD" title="Please enter a date in the format YYYY-MM-DD" />
+    </label>
+    <br><br>
+
+    <!-- Date field, pattern yyyy-mm-dd -->
+    <label>End Date
+    <input type="date" name="end_date" id="end_date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" placeholder="YYYY-MM-DD" title="Please enter a date in the format YYYY-MM-DD" />
+    </label>
+    <br><br>
     <button type="submit">View Account</button>
 </form>
 </div>
