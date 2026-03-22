@@ -51,8 +51,8 @@ echo "Customer ID is :" . $_POST['cust_id'] . "<br>"; // display the customer ID
 echo "Rate ID is :" . $_POST['rate_id'] . "<br>"; // display the rate ID
 
 // Create SQL to insert the new deposit account into the depositacc table
-$sql = "INSERT INTO depositacc (OpenedDate, Balance, Status, CustId, RateId) \n"
-     . "VALUES ('$_POST[opened_date]', $_POST[initial_deposit], 'open', $_POST[cust_id], $_POST[rate_id])";
+$sql = "INSERT INTO depositacc (OpenedDate, Balance, CustId, RateId, DeleteDeposit) \n"
+     . "VALUES ('$_POST[opened_date]', $_POST[initial_deposit], $_POST[cust_id], $_POST[rate_id], 0)";
 
 // Execute the SQL query and check if it was successful
 if (!mysqli_query($con, $sql))

@@ -44,14 +44,49 @@ include 'db.inc.php';
 $custid = $_POST['cust_id'];
 $accountid = $_POST['account_id'];
 
-$sql = "SELECT Firstname, Surname, CustId, DepositAccountId, Balance, OpenedDate FROM customer 
-inner join depositacc ON customer.CustId = depositacc.CustId AND customer.DeletedFlag = 0 AND depositacc.DeletedFlag = 0";
+$sql = "SELECT customer.Firstname, customer.Surname, customer.CustId, depositacc.DepositAccountId, depositacc.Balance, depositacc.OpenedDate 
+FROM customer inner join depositacc ON customer.CustId = depositacc.CustId WHERE depositacc.DepositAccountId = " . $_POST['account_id'] . "
+ AND customer.DeleteCust = 0 AND depositacc.DeleteDeposit = 0";
 
 if (!$result = mysqli_query($con, $sql))
     {
         die("An Error in the SQL Query: " . mysqli_error($con));
     }
 
-$rowcount = mysqli_affected_rows($con);
+$row = mysqli_fetch_array($result);
+echo "<h2>Account Details</h2>";
+echo "<p><strong>Customer:</strong> " . $row['Firstname'] . " " . $row['Surname'] . "</p>";
+echo "<p><strong>Customer ID:</strong> " . $row['CustId'] . "</p>";
+echo "<p><strong>Account Number:</strong> " . $row['DepositAccountId'] . "</p>";
+echo "<p><strong>Balance:</strong> &euro;" . $row['Balance'] . "</p>";
+echo "<p><strong>Opened Date:</strong> " . $row['OpenedDate'] . "</p>";
 
+$sql2 = "SELECT * FROM `transaction` WHERE DepositAccountId = " . $_POST['account_id'] . " ORDER BY Date LIMIT 10";
+
+if (!$result2 = mysqli_query($con, $sql2))
+    {
+        die("An Error in the SQL Query". mysqli_error($con));
+    }
+
+$transactionCount = mysqli_num_rows($result2);
+
+if ($transactionCount == 0)
+    {
+        echo "<p>No transactions were founf for this account!</p>";
+    }
+else
+    {
+        echo "<table>";
+        echo "<tr><th>Date</th><th>Type</th><th>Amount</th><th>Balance</th></tr>";
+        while ($row = mysqli_fetch_array($result2))
+            {
+                $date = $row["Date"];
+                $type = $row["Type"];
+                $amount = $row["Amount"];
+                $balance = $row["Balance"];
+
+                echo "<tr><td>" . $date ."</td><td>". $type ."</td><td>". $amount ."</td><td>". $balance ."</td></tr>";
+            }
+        echo "</table>";
+    }
 ?>

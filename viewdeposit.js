@@ -57,6 +57,22 @@ function lookupBySelect()
             document.getElementById("disp_address").innerHTML = address;
             document.getElementById("cust_id").value = id;
             document.getElementById("customerDetails").style.display = "block";
+
+            var accSelect = document.getElementById("acc_select");
+            var accData = document.getElementById("acc_data");
+            accSelect.innerHTML = "<option value=''>-- Select an Account --</option>";
+            // Loop through hidden account data and add options matching this customer
+            for (var i = 0; i < accData.options.length; i++)
+                {
+                    var optionValue = accData.options[i].value;
+                    var optCustId = optionValue.split(",")[0];
+                    var optAccId = optionValue.split(",")[1];
+                    var optBalance = optionValue.split(",")[2];
+                    if (optCustId == id)
+                        {
+                            accSelect.innerHTML = accSelect.innerHTML + "<option value='" + optAccId + "," + optBalance + "'>Account " + optAccId + " - Balance: &euro;" + optBalance + "</option>";
+                        }
+                }
         }
 }
 
@@ -134,8 +150,7 @@ function selectAccount()
             document.getElementById("disp_acc_id").innerHTML = accId;
             document.getElementById("disp_balance").innerHTML = balance;
             // Copy the account ID and balance into the hidden form fields so they get sent to PHP
-            document.getElementById("delid").value = accId;
-            document.getElementById("balance").value = balance;
+            document.getElementById("account_id").value = accId;
             // Show the account details section
             document.getElementById("accountDetails").style.display = "block";
         }
@@ -144,29 +159,4 @@ function selectAccount()
             // Hide the account details section if no account is selected
             document.getElementById("accountDetails").style.display = "none";
         }
-}
-
-function validation()
-{
-    var custId = document.getElementById("cust_id").value;
-    if (!custId)
-        {
-            alert("Please select a customer before submitting the form.");
-            return false; // Prevent form submission
-        }
-    var delid = document.getElementById("delid").value;
-    if (!delid)
-        {
-            alert("Please select an account to close.");
-            return false; // Prevent form submission
-        }
-    var balance = parseFloat(document.getElementById("balance").value);
-    if (isNaN(balance) || balance > 0)
-        {
-            alert("You cannot close an account with a positive balance. Please withdraw the remaining funds first.");
-            return false; // Prevent form submission
-        }
-    // Requires users to confirm they want to close the account
-    var finalConfirmation = confirm("Are you sure you want to close Account " + delid + "?");
-    return finalConfirmation;
 }

@@ -1,3 +1,10 @@
+<!--
+Name:      Damon Kelly
+StudentID: C00307057
+Date:      23/02/2026
+Purpose:   Add page to open a deposit account for an already existing customer
+-->
+
 <!doctype html>
 <head>
 <title>Open a Deposit Account</title>
@@ -25,8 +32,8 @@
      <div class="submenu">
        <ul>
         <P><a href=DepositAccMenu.html>Back to Deposit Account Menu</a></P>
-        <P><a href=AmendViewDeposit.html>Amend/View Deposit Account</a></P>    
-        <P><a href=CloseDepositAccount.html>Close Deposit Account</a></P>
+        <P><a href=ViewDepositAccount.html.php>View Deposit Account</a></P>    
+        <P><a href=CloseDepositAccount.html.php>Close Deposit Account</a></P>
        </ul> 
     </div>
 <main>
@@ -39,7 +46,7 @@
 <br>
 
 <label>Enter Customer ID
-<input type="number" id="cust_id_lookup" name="cust_id_lookup" />
+<input type="number" id="cust_id_lookup" name="cust_id_lookup" title="Please enter a valid customer ID" placeholder="1" />
 </label>
 <button type="button" onclick="lookupById()">Search</button>
 
@@ -49,10 +56,10 @@
 <label>Or Select Customer by Name
 <?php
 include 'db.inc.php';
-$sql = "SELECT CustId, Firstname, Surname, Phone, Email, eircode, dob FROM customer";
+$sql = "SELECT CustId, Firstname, Surname, Phone, Address, Email, eircode, dob FROM customer WHERE DeleteCust = 0";
 if (!$result = mysqli_query($con, $sql))
     {
-        die('Error in querying the database' . mysqli_error($con));
+        die('Error in querying the database: ' . mysqli_error($con));
     }
 echo "<select id='cust_select' onchange='lookupBySelect()'>";
 echo "<option value=''>-- Select a Customer --</option>";
@@ -65,12 +72,12 @@ while ($row = mysqli_fetch_array($result))
         $email = $row['Email'];
         $eircode = $row['eircode'];
         $dob = $row['dob'];
+        $address = $row['Address'];
         // Pack all the data into the value so JS can split it out
-        $allText = "$id,$fname,$sname,$phone,$email,$eircode,$dob";
+        $allText = "$id,$fname,$sname,$phone,$email,$eircode,$dob,$address";
         echo "<option value='$allText'>$fname $sname</option>";
     }
 echo "</select>";
-mysqli_close($con);
 ?>
 </label>
 
@@ -87,6 +94,7 @@ mysqli_close($con);
 <p><strong>Email:</strong> <span id="disp_email"></span></p>
 <p><strong>Eircode:</strong> <span id="disp_eircode"></span></p>
 <p><strong>Date of Birth:</strong> <span id="disp_dob"></span></p>
+<p><strong>Address:</strong> <span id="disp_address"></span></p>
 <br>
 <p>If the details above are correct, please fill in the account details below.</p>
 <hr>
@@ -101,7 +109,7 @@ mysqli_close($con);
 <input type="hidden" name="cust_id" id="cust_id" />
 
 <label>Date Opened
-<input type="date" name="opened_date" id="opened_date" required placeholder="YYYY-MM-DD" title="Please enter a date in the format YYYY-MM-DD" />
+<input type="date" name="opened_date" id="opened_date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required placeholder="YYYY-MM-DD" title="Please enter a date in the format YYYY-MM-DD" />
 </label>
 <br><br>
 
@@ -109,12 +117,13 @@ mysqli_close($con);
 <label>Interest Rate
 <?php
 include 'db.inc.php';
-$sql = "SELECT RateId, Value, DateFrom, DateTo FROM rate WHERE AccType = 'D'";
+$sql = "SELECT `RateId`, `DateFrom`, `DateTo`, `Value` FROM rate WHERE `AccType` = 'D' AND `DeleteRate` = 0";
 if (!$result = mysqli_query($con, $sql))
     {
-        die('Error in querying the database' . mysqli_error($con));
+        die('Error in querying the database: ' . mysqli_error($con));
     }
 echo "<select name='rate_id' required>";
+echo "<option value=''>-- Select a Rate --</option>";
 while ($row = mysqli_fetch_array($result))
     {
         $rateId   = $row['RateId'];

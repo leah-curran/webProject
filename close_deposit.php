@@ -8,7 +8,7 @@ Purpose:   Close page to close a deposit account for an already existing custome
 <?php
 session_start();
 include 'db.inc.php';
-$sql = "UPDATE depositacc SET DeletedFlag = 1 WHERE DepositAccountId = " . $_POST['delid'];
+$sql = "UPDATE depositacc SET DeleteDeposit = 1 WHERE DepositAccountId = " . $_POST['delid'];
 if (!mysqli_query($con, $sql))
     {
         echo "Error " . mysqli_error($con);

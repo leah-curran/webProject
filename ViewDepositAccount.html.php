@@ -67,8 +67,8 @@ Purpose:   View page to view a deposit account for an already existing customer
 <label>Or Select Customer by Name
     <?php
     include 'db.inc.php';
-    $sql = "SELECT CustId, Firstname, Surname, Phone, CustAddress, Email, eircode, dob 
-            FROM customer WHERE DeletedFlag = 0";
+    $sql = "SELECT CustId, Firstname, Surname, Phone, Address, Email, eircode, dob 
+            FROM customer WHERE DeleteCust = 0";
     if (!$result = mysqli_query($con, $sql))
         {
             die('Error in querying the database' . mysqli_error($con));
@@ -84,7 +84,7 @@ Purpose:   View page to view a deposit account for an already existing customer
             $email   = $row['Email'];
             $eircode = $row['eircode'];
             $dob     = $row['dob'];
-            $address = $row['CustAddress'];
+            $address = $row['Address'];
             $allText = "$id,$fname,$sname,$phone,$email,$eircode,$dob,$address";
             echo "<option value='$allText'>$fname $sname</option>";
         }
@@ -92,7 +92,7 @@ Purpose:   View page to view a deposit account for an already existing customer
 
     // Hidden select packed with all open deposit account data for JS to loop through
     // This is needed to link the customer to their accounts for the account selection step as customers can have multiple accounts
-    $sql2 = "SELECT DepositAccountId, CustId, Balance FROM depositacc WHERE DeletedFlag = 0";
+    $sql2 = "SELECT DepositAccountId, CustId, Balance FROM depositacc WHERE DeleteDeposit = 0";
     if (!$result2 = mysqli_query($con, $sql2))
         {
             die('Error in querying the database' . mysqli_error($con));
@@ -148,14 +148,13 @@ Purpose:   View page to view a deposit account for an already existing customer
 <h3>Step 4: Confirm Account Details</h3>
 <br>
 <p><strong>Account Number:</strong> <span id="disp_acc_id"></span></p>
-<!-- Account can't be closed if balance isn't zero, show the balance here for confirmation -->
 <p><strong>Balance:</strong> &euro;<span id="disp_balance"></span></p>
 <br>
 <p>Please confirm the details above before closing the account.</p>
 <hr>
 <br>
 
-<form action="view_deposit.php" method="POST">
+<form action="view_deposit.php" method="post">
     <input type="hidden" name="cust_id" id="cust_id" />
     <input type="hidden" name="account_id" id="account_id"/>
     <button type="submit">View Account</button>

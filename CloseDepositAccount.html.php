@@ -64,7 +64,7 @@ Purpose:   Close page to close a deposit account for an already existing custome
 <label>Or Select Customer by Name
 <?php
 include 'db.inc.php';
-$sql = "SELECT CustId, Firstname, Surname, Phone, CustAddress, Email, eircode, dob FROM customer WHERE DeletedFlag = 0";
+$sql = "SELECT CustId, Firstname, Surname, Phone, Address, Email, eircode, dob FROM customer WHERE DeleteCust = 0";
 if (!$result = mysqli_query($con, $sql))
     {
         die('Error in querying the database' . mysqli_error($con));
@@ -80,7 +80,7 @@ while ($row = mysqli_fetch_array($result))
         $email = $row['Email'];
         $eircode = $row['eircode'];
         $dob = $row['dob'];
-        $address = $row['CustAddress'];
+        $address = $row['Address'];
 
         // Pack all the data into the value so JS can split it out
         $allText = "$id,$fname,$sname,$phone,$email,$eircode,$dob,$address";
@@ -91,7 +91,7 @@ echo "</select>";
 
 // Hidden select packed with all open deposit account data for JS to loop through
 // This is needed to link the customer to their accounts for the account selection step as customers can have multiple accounts
-$sql2 = "SELECT DepositAccountId, CustId, Balance FROM depositacc WHERE DeletedFlag = 0";
+$sql2 = "SELECT DepositAccountId, CustId, Balance FROM depositacc WHERE DeleteDeposit = 0";
 if (!$result2 = mysqli_query($con, $sql2))
     {
         die('Error in querying the database' . mysqli_error($con));

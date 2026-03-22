@@ -1,3 +1,10 @@
+//
+//Name:      Damon Kelly
+//StudentID: C00307057
+//Date:      16/03/2026
+//Purpose:   javascript for the add page to open a deposit account for an already existing customer
+//
+
 // Function to look up a customer by the ID they typed in
 // Searches through the dropdown options to find a matching customer ID
 function lookupById()
@@ -50,6 +57,7 @@ function lookupBySelect()
             var email = parts[4];
             var eircode = parts[5];
             var dob = parts[6];
+            var address = parts[7];
 
             // Fill in the confirmation fields
             document.getElementById("disp_id").innerHTML = id;
@@ -58,6 +66,7 @@ function lookupBySelect()
             document.getElementById("disp_email").innerHTML = email;
             document.getElementById("disp_eircode").innerHTML = eircode;
             document.getElementById("disp_dob").innerHTML = dob;
+            document.getElementById("disp_address").innerHTML = address;
 
             // Copy the customer ID into the hidden form field so it gets sent to PHP
             document.getElementById("cust_id").value = id;
@@ -84,7 +93,7 @@ function validation()
         }
 
     var deposit = document.getElementById("initial_deposit").value;
-    if (!deposit || deposit <= 0)
+    if (!deposit)
         {
             alert("Please enter a valid initial deposit amount.");
             return false; // Prevent form submission
