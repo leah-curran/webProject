@@ -5,16 +5,17 @@ Date:      02/03/2026
 Purpose:   View page to view a deposit account for an already existing customer
 -->
 
-<?php session_start(); ?>
 <!doctype html>
 <head>
     <title>View Deposit Account</title>
+    <!-- default styling -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="draft.css" />
 </head>
 <body>
+<!-- navigation links -->
 <div class="nav">
     <img src="pics/logo.jpg" width="100" height="100">
     <div class="links">
@@ -31,6 +32,7 @@ Purpose:   View page to view a deposit account for an already existing customer
     </ul>
     </div>
 </div>
+<!-- submenu for other deposit pages -->
 <div class="submenu">
     <ul>
         <p><a href="DepositAccMenu.html">Back to Deposit Account Menu</a></p>
@@ -48,6 +50,7 @@ Purpose:   View page to view a deposit account for an already existing customer
 <h3>Step 1: Find Customer</h3>
 <br>
 
+<!-- Customer lookup by the id -->
 <label>Enter Customer ID
     <input type="number" id="cust_id_lookup" name="cust_id_lookup" placeholder="1" 
         title="Please enter a valid customer ID" />
@@ -64,19 +67,26 @@ Purpose:   View page to view a deposit account for an already existing customer
 
 <br><br>
 
+<!-- dropdown box of customers -->
 <label>Or Select Customer by Name
     <?php
     include 'db.inc.php';
+    // sql query to select the customers that arent deleted
     $sql = "SELECT CustId, Firstname, Surname, Phone, Address, Email, eircode, dob 
             FROM customer WHERE DeleteCust = 0";
+    // run the sql query
     if (!$result = mysqli_query($con, $sql))
         {
             die('Error in querying the database' . mysqli_error($con));
         }
+    // dropdown list of customers, run js function when a customer is chosen
     echo "<select id='cust_select' onchange='lookupBySelect()'>";
+    // set default dropdown value
     echo "<option value=''>-- Select a Customer --</option>";
+    // loop through the query results
     while ($row = mysqli_fetch_array($result))
         {
+            // set the values from current row to variables
             $id      = $row['CustId'];
             $fname   = $row['Firstname'];
             $sname   = $row['Surname'];
@@ -85,21 +95,29 @@ Purpose:   View page to view a deposit account for an already existing customer
             $eircode = $row['eircode'];
             $dob     = $row['dob'];
             $address = $row['Address'];
+            // put all the variables into a string seperated by commas so js can seperate them
             $allText = "$id,$fname,$sname,$phone,$email,$eircode,$dob,$address";
+            // echo out the customer name
             echo "<option value='$allText'>$fname $sname</option>";
         }
     echo "</select>";
 
     // Hidden select packed with all open deposit account data for JS to loop through
     // This is needed to link the customer to their accounts for the account selection step as customers can have multiple accounts
+
+    // sql query to select account details for non deleted accounts
     $sql2 = "SELECT DepositAccountId, CustId, Balance FROM depositacc WHERE DeleteDeposit = 0";
+    // run the query
     if (!$result2 = mysqli_query($con, $sql2))
         {
             die('Error in querying the database' . mysqli_error($con));
         }
+    // hidden dropdown with account information so it can be used by js
     echo "<select id='acc_data' style='display:none'>";
+    // loop through query results
     while ($row2 = mysqli_fetch_array($result2))
         {
+            // set the values from query to variables
             $accId = $row2['DepositAccountId'];
             $custId = $row2['CustId'];
             $balance = $row2['Balance'];
@@ -113,11 +131,12 @@ Purpose:   View page to view a deposit account for an already existing customer
 
 <br><br>
 
-<!-- Step 2: Customer confirmation, shown by JS same as open deposit page -->
+<!-- Step 2: Customer confirmation, shown by JS same as open deposit page, display none so they arent displayed until js sets values -->
 <div id="customerDetails" style="display:none;">
 <hr>
 <h3>Step 2: Confirm Customer Details</h3>
 <br>
+<!-- display details, strong makes them bold, span lets you set values using id through js -->
 <p><strong>Customer ID:</strong> <span id="disp_id"></span></p>
 <p><strong>Name:</strong> <span id="disp_name"></span></p>
 <p><strong>Phone:</strong> <span id="disp_phone"></span></p>
@@ -134,7 +153,8 @@ Purpose:   View page to view a deposit account for an already existing customer
 <h3>Step 3: Select Account</h3>
 <br>
 <label>Deposit Account
-<!-- This dropdown is populated with Account IDs linked to the customer after the lookup step. It is populated by JS by looping through the hidden acc_data select and matching the customer ID -->
+<!-- This dropdown is populated with Account IDs linked to the customer after the lookup step. 
+ It is populated by JS by looping through the hidden acc_data select and matching the customer ID -->
 <select id="acc_select" onchange="selectAccount()">
     <option value="">-- Select an Account --</option>
 </select>
@@ -142,7 +162,7 @@ Purpose:   View page to view a deposit account for an already existing customer
 
 <br><br>
 
-<!-- Account details shown after account is picked -->
+<!-- Account details shown after account is picked, display none so hidden until js sets values -->
 <div id="accountDetails" style="display:none;">
 <hr>
 <h3>Step 4: Confirm Account Details</h3>
@@ -154,7 +174,9 @@ Purpose:   View page to view a deposit account for an already existing customer
 <hr>
 <br>
 
+<!-- form that runs view deposit when submitted -->
 <form action="view_deposit.php" method="post">
+    <!-- hidden inputs just so they can be posted to php, js sets them -->
     <input type="hidden" name="cust_id" id="cust_id" />
     <input type="hidden" name="account_id" id="account_id"/>
     <button type="submit">View Account</button>
