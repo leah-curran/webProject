@@ -8,12 +8,15 @@ Purpose:   php for the add page to open a deposit account for an already existin
 <!doctype html>
 <head>
 <title>Open a Deposit Account</title>
+<!-- link to styling -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="draft.css" />
+<script src="opendeposit.js"></script>
 </head>
 <body>
+<!-- navigation bar links -->
 <div class="nav">
      <img src="pics/logo.jpg" width="100" height="100">
      <div class="links">
@@ -28,10 +31,11 @@ Purpose:   php for the add page to open a deposit account for an already existin
 <li><A HREF="ChangePassword.html">Change Password</A></li>
 </ul></div>
     </div>
+    <!-- submenu on the left of the screen -->
      <div class="submenu">
        <ul>
         <P><a href=DepositAccMenu.html>Back to Deposit Account Menu</a></P>
-        <P><a href=AmendViewDeposit.html.php>Amend/View Deposit Account</a></P>    
+        <P><a href=ViewDepositAccount.html.php>View Deposit Account</a></P>    
         <P><a href=CloseDepositAccount.html.php>Close Deposit Account</a></P>
        </ul> 
     </div>
