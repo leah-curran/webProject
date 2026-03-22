@@ -6,8 +6,10 @@ Purpose:   Close page to close a deposit account for an already existing custome
 -->
 
 <?php
+// start a session to store values in session variables
 session_start();
 include 'db.inc.php';
+// sql query to set the delete flag to 1 for selected account
 $sql = "UPDATE depositacc SET DeleteDeposit = 1 WHERE DepositAccountId = " . $_POST['delid'];
 if (!mysqli_query($con, $sql))
     {
@@ -21,12 +23,14 @@ mysqli_close($con);
 <!doctype html>
 <head>
 <title>Account Closed</title>
+<!-- default page styling -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="draft.css" />
 </head>
 <body>
+<!-- navigation menu -->
 <div class="nav">
     <img src="pics/logo.jpg" width="100" height="100">
     <div class="links">
@@ -41,6 +45,7 @@ mysqli_close($con);
 <li><A HREF="ChangePassword.html">Change Password</A></li>
 </ul></div>
 </div>
+<!-- submenu for other deposit pages -->
 <div class="submenu">
     <ul>
         <P><a href=DepositAccMenu.html>Back to Deposit Account Menu</a></P>
@@ -52,6 +57,7 @@ mysqli_close($con);
 <div class="depositBody">
 <h1>Account Closed</h1>
 <br>
+<!-- Output a confirmation that selected account was closed -->
 <p>Deposit Account <strong><?php echo $_SESSION["depositid"]; ?></strong> has been successfully closed.</p>
 <br>
 <p><a href="DepositAccMenu.html">Return to Deposit Account Menu</a></p>
