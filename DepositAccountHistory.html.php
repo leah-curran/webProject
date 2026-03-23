@@ -168,7 +168,8 @@ Purpose:   History page to view a deposit account history for an already existin
     <input type="date" name="end_date" id="end_date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" placeholder="YYYY-MM-DD" title="Please enter a date in the format YYYY-MM-DD" />
     </label>
     <br><br>
-    <button type="submit">View Account</button>
+
+    <button type="submit">View Account History</button>
 </form>
 </div>
 

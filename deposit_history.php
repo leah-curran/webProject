@@ -107,5 +107,11 @@ else
                 echo "<tr><td>" . $date ."</td><td>". $type ."</td><td>". $amount ."</td><td>". $balance ."</td></tr>";
             }
         echo "</table>";
+
+        echo "<form><br><br><label>Do you want to print this statement?
+            <input type='text' name='print' id='print' pattern='[yYnN]{1}' placeholder='Y/N' title='Enter Y to print this screen, N to not print the screen.'/>
+            </label>
+            <br><br>
+            <button type='submit'>Print Account History</button></form>";
     }
 ?>
