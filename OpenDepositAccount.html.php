@@ -131,7 +131,7 @@ echo "</select>";
 <?php
 include 'db.inc.php';
 // sql query to get deposit accout rates from the rate table
-$sql = "SELECT RateId, DateFrom, DateTo, Value FROM rate WHERE AccType = D AND DeleteRate = 0";
+$sql = "SELECT RateId, DateFrom, DateTo, Value FROM rate WHERE AccType = 'D' AND DeleteRate = 0";
 if (!$result = mysqli_query($con, $sql))
     {
         die('Error in querying the database: ' . mysqli_error($con));

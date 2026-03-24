@@ -195,6 +195,7 @@ function selectAccount()
             document.getElementById("disp_balance").innerHTML = balance;
             // Copy the account ID and balance into the hidden form fields so they get sent to PHP
             document.getElementById("delid").value = accId;
+            document.getElementById("balance").value = balance;
             // Show the account details section
             document.getElementById("accountDetails").style.display = "block";
         }
