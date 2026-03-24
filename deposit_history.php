@@ -41,6 +41,8 @@ Purpose:   php for the history page to view a deposit account history for an alr
 <main>
 <div class = "depositBody">
 
+<script src="deposithistory.js"></script>
+
 <?php
 include 'db.inc.php';
 
@@ -69,15 +71,17 @@ echo "<p><strong>Opened Date:</strong> " . $row['OpenedDate'] . "</p>";
 
 $start = $_POST["start_date"];
 $end = $_POST["end_date"];
+$id = $_POST["account_id"];
 
 if ($start && $end)
     {
-        $sql2 = "SELECT * FROM `transaction` WHERE DepositAccountId = " . $_POST['account_id'] . " AND Date BETWEEN '" . $start . "' AND '" . $end . "' ORDER BY Date";
+        $sql2 = "SELECT * FROM `transaction` WHERE DepositAccountId = '" . $_POST['account_id'] . "' AND Date BETWEEN '" . $start . "' AND '" . $end . "' ORDER BY Date";
+        echo $sql2;
     }
 
 else
     {
-        $sql2 = "SELECT * FROM `transaction` WHERE DepositAccountId = " . $_POST['account_id'] . " ORDER BY Date";
+        $sql2 = "SELECT * FROM `transaction` WHERE DepositAccountId = '" . $_POST['account_id'] . "' ORDER BY Date";
     }
 
 if (!$result2 = mysqli_query($con, $sql2))
@@ -108,8 +112,18 @@ else
             }
         echo "</table>";
 
-        echo "<form><br><br><label>Do you want to print this statement?
+        echo "<form action='print_history.php' method='post' onsubmit='return validate();'><br><br>
+            <label>Do you want to print this statement?
             <input type='text' name='print' id='print' pattern='[yYnN]{1}' placeholder='Y/N' title='Enter Y to print this screen, N to not print the screen.'/>
+            </label>
+            <label>
+            <input type='hidden' name='start_date' value='$start'/>
+            </label>
+            <label>
+            <input type='hidden' name='end_date' value='$end'/>
+            </label>
+            <label>
+            <input type='hidden' name='account_id' value='$id'/>
             </label>
             <br><br>
             <button type='submit'>Print Account History</button></form>";

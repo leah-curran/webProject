@@ -226,3 +226,24 @@ function dateValidate()
             return true;
         }
 }
+
+// validate the user choice for printing the history
+function validate()
+{
+    var choice = document.getElementById("print");
+
+    if (choice == "N" || choice == "n")
+        {
+            window.location.href = "DepositAccountHistory.html.php";
+            return false;
+        }
+    else if (choice == "Y" || choice == "y")
+        {
+            return true;
+        }
+    else
+        {
+            alert("Please enter Y or N");
+            return false;
+        }
+}
